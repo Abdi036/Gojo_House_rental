@@ -10,7 +10,7 @@ import { cloudinaryProfileImageUpload } from "../utils/cloudinaryUpload.js";
  * @returns {object} user
  * @returns {string} token
  */
-const login = async (req, res) => {
+async function login(req, res) {
   const { role, email, password } = req.body;
   if (!email || !password) {
     throw new BadRequestError("Provide email and password");
@@ -93,15 +93,14 @@ const login = async (req, res) => {
   } else {
     throw new BadRequestError("Invalid Role");
   }
-};
+}
 
 /**
  * @description Register a user
  * @returns {object} user
  * @returns {string} token
  */
-const register = async (req, res) => {
-
+async function register(req, res) {
   const { role, email } = req.body;
   // console.log(req.body)
   if (role === "owner") {
@@ -111,7 +110,7 @@ const register = async (req, res) => {
       process.env.EMAIL_VERIFICATION_KEY,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     // add token to req.body
@@ -137,7 +136,7 @@ const register = async (req, res) => {
     `;
     await sendEmail(to, from, subject, body);
 
-    const profileImage = await cloudinaryProfileImageUpload(req)
+    const profileImage = await cloudinaryProfileImageUpload(req);
     owner.profileImage = profileImage;
     await owner.save();
 
@@ -151,7 +150,7 @@ const register = async (req, res) => {
       process.env.EMAIL_VERIFICATION_KEY,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     // add token to req.body
@@ -176,7 +175,7 @@ const register = async (req, res) => {
     `;
     await sendEmail(to, from, subject, body);
 
-    const profileImage = await cloudinaryProfileImageUpload(req)
+    const profileImage = await cloudinaryProfileImageUpload(req);
     tenant.profileImage = profileImage;
     await tenant.save();
 
@@ -186,12 +185,12 @@ const register = async (req, res) => {
   } else {
     throw new BadRequestError("Invalid Role");
   }
-};
+}
 
 /**
  * @description Verify user account
  */
-const verifyAccount = (req, res) => {
+async function verifyAccount(req, res) {
   const { role, token } = req.body;
 
   if (!token) {
@@ -230,7 +229,7 @@ const verifyAccount = (req, res) => {
             return res.json({ msg: "User successfully verified" });
           }
         });
-      }
+      },
     );
   } else if (role === "tenant") {
     //verify token
@@ -265,7 +264,7 @@ const verifyAccount = (req, res) => {
             return res.json({ msg: "User successfully verified" });
           }
         });
-      }
+      },
     );
   } else {
     throw new BadRequestError("Invalid Role");
@@ -275,7 +274,7 @@ const verifyAccount = (req, res) => {
 /**
  * @description Resend the verification email
  */
-const resendVerificationEmail = async (req, res) => {
+async function resendVerificationEmail(req, res) {
   const { email, role } = req.body;
 
   if (role === "owner") {
@@ -285,7 +284,7 @@ const resendVerificationEmail = async (req, res) => {
       process.env.EMAIL_VERIFICATION_KEY,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     // find user with email
@@ -324,7 +323,7 @@ const resendVerificationEmail = async (req, res) => {
       process.env.EMAIL_VERIFICATION_KEY,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     const tenant = await TenantUser.findOne({ email: email });
@@ -362,7 +361,7 @@ const resendVerificationEmail = async (req, res) => {
  * @description generate new access token
  * @returns {string} access token
  */
-const refreshOwner = async (req, res) => {
+async function refreshOwner(req, res) {
   const cookie = req.cookies;
 
   if (!cookie?.jwt) {
@@ -373,7 +372,7 @@ const refreshOwner = async (req, res) => {
   try {
     const payload = jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET_OWNER
+      process.env.REFRESH_TOKEN_SECRET_OWNER,
     );
 
     const user = await OwnerUser.findOne({ _id: payload.userId });
@@ -392,7 +391,7 @@ const refreshOwner = async (req, res) => {
  * @description generate new access token
  * @returns {string} access token
  */
-const refreshTenant = async (req, res) => {
+async function refreshTenant(req, res) {
   const cookie = req.cookies;
 
   if (!cookie?.jwt) {
@@ -403,7 +402,7 @@ const refreshTenant = async (req, res) => {
   try {
     const payload = jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET_TENANT
+      process.env.REFRESH_TOKEN_SECRET_TENANT,
     );
 
     const user = await TenantUser.findOne({ _id: payload.userId });
@@ -422,7 +421,7 @@ const refreshTenant = async (req, res) => {
  * @description Forgot Password - send email
  * @route POST /api/auth/forgot-password
  */
-const forgotPassword = async (req, res) => {
+async function forgotPassword(req, res) {
   const { email, role } = req.body;
 
   if (role === "owner") {
@@ -498,7 +497,7 @@ const forgotPassword = async (req, res) => {
  * @description Reset Password
  * @route POST /api/auth/reset-password
  */
-const resetPassword = async (req, res) => {
+async function resetPassword(req, res) {
   const { token, newPassword, passwordRepeated, role } = req.body;
   if (!token) {
     throw new BadRequestError("Token not found");
@@ -540,7 +539,7 @@ const resetPassword = async (req, res) => {
             return res.json({ msg: "Password successfully changed" });
           }
         });
-      }
+      },
     );
   } else if (role === "tenant") {
     jwt.verify(
@@ -568,7 +567,7 @@ const resetPassword = async (req, res) => {
             return res.json({ msg: "Password successfully changed" });
           }
         });
-      }
+      },
     );
   } else {
     throw new BadRequestError("Invalid Role");
@@ -578,7 +577,7 @@ const resetPassword = async (req, res) => {
 /**
  * @description Logout a user
  */
-const logout = (req, res) => {
+async function logout(req, res) {
   const cookies = req.cookies;
   if (!cookies?.jwt) {
     return res.sendStatus(204); //No content
