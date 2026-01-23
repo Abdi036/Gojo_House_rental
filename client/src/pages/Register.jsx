@@ -69,7 +69,7 @@ const Register = () => {
     (e) => {
       setFormValues({ ...values, [e.target.name]: e.target.value });
     },
-    [values]
+    [values],
   );
 
   const handleSubmit = (e) => {
@@ -81,8 +81,7 @@ const Register = () => {
     const dob = moment(date).format("YYYY-MM-DD");
     const age = ageCalculator(dob);
     if (age < 18) {
-      dispatch(
-        createAlert("You must be 18 years or older to register"))
+      dispatch(createAlert("You must be 18 years or older to register"));
       return;
     }
     formData.append("dateOfBirth", moment(date).format("YYYY-MM-DD"));
@@ -101,7 +100,7 @@ const Register = () => {
       }
       dispatch(clearAlert());
     },
-    [dispatch]
+    [dispatch],
   );
 
   const isOwner = param.role === "owner";
@@ -117,10 +116,17 @@ const Register = () => {
           <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary opacity-20 blur-3xl"></div>
 
           <div className="relative z-20 flex flex-col items-center text-center p-12 text-white">
-            <img src={registerImg} className="w-3/4 max-w-sm mb-8 drop-shadow-2xl animate-pulse" alt="register banner" style={{ animationDuration: '3s' }} />
-            <h2 className="font-display text-4xl mb-4 tracking-wide">Join Rent Manager</h2>
+            <img
+              src={registerImg}
+              className="w-3/4 max-w-sm mb-8 drop-shadow-2xl animate-pulse"
+              alt="register banner"
+              style={{ animationDuration: "3s" }}
+            />
+            <h2 className="font-display text-4xl mb-4 tracking-wide">
+              Join Rent Manager
+            </h2>
             <p className="text-lg font-light max-w-md opacity-90">
-              {isOwner 
+              {isOwner
                 ? "Start managing your properties efficiently today."
                 : "Create an account to find your next home."}
             </p>
@@ -129,10 +135,12 @@ const Register = () => {
 
         {/* Right Side - Form Section */}
         <div className="w-full xl:w-7/12 flex flex-col relative h-full">
-           {/* Header */}
-           <div className="p-6 flex items-center gap-3 bg-white z-20 border-b xl:border-none">
-             <Logo />
-             <h5 className="font-display text-2xl text-primaryDark">Rent Manager</h5>
+          {/* Header */}
+          <div className="p-6 flex items-center gap-3 bg-white z-20 border-b xl:border-none">
+            <Logo />
+            <h5 className="font-display text-2xl text-primaryDark">
+              Rent Manager
+            </h5>
           </div>
 
           <div className="flex-grow overflow-y-auto w-full">
@@ -207,7 +215,7 @@ const Register = () => {
                         (date) => {
                           setDate(date);
                         },
-                        [setDate]
+                        [setDate],
                       )}
                     />
                     <FormSelectField
@@ -218,7 +226,7 @@ const Register = () => {
                       handleChange={handleChange}
                     />
                     <div className="md:col-span-2">
-                       <FormPasswordField
+                      <FormPasswordField
                         value={values.password}
                         handleChange={handleChange}
                       />
@@ -231,8 +239,19 @@ const Register = () => {
                       htmlFor="profileImg"
                       className="cursor-pointer font-medium text-primary hover:text-primaryDark mb-2 flex items-center gap-2"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                       {image ? "Change Profile Image" : "Upload Profile Image"}
                     </label>
@@ -246,14 +265,18 @@ const Register = () => {
                       accept="image/*"
                     />
                     {!image && (
-                       <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500">
                         JPG, JPEG, PNG or GIF (Max 3.5MB)
                       </p>
                     )}
-                    
+
                     {image && (
                       <div className="mt-4 p-2 border rounded shadow-sm bg-white">
-                        <img src={image} alt="profilePreview" className="h-24 w-24 object-cover rounded-full" />
+                        <img
+                          src={image}
+                          alt="profilePreview"
+                          className="h-24 w-24 object-cover rounded-full"
+                        />
                       </div>
                     )}
                   </div>
@@ -278,7 +301,7 @@ const Register = () => {
                           boxShadow: "0 6px 20px 0 rgba(173, 162, 255, 0.23)",
                           transform: "translateY(-1px)",
                         },
-                        transition: "all 0.2s ease-in-out"
+                        transition: "all 0.2s ease-in-out",
                       }}
                     >
                       {isLoading ? (
@@ -301,7 +324,7 @@ const Register = () => {
                         to={`/login/${param.role}`}
                         className="text-secondary font-bold hover:text-secondaryDark transition-colors hover:underline"
                       >
-                         Sign In
+                        Sign In
                       </Link>
                     </p>
                   </div>
