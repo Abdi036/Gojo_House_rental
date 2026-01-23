@@ -56,9 +56,26 @@ npm install
 ```
 
 Create a `.env` file in the `server/` directory. You can use `.env.example` as a reference. Ensure you define:
-- `MONGO_URI`: Your database connection string.
-- `JWT_SECRET`: Secret key for signing tokens.
-- `PORT`: Server port (default is usually 5500).
+```env
+MONGO_URI="your_mongodb_connection_string"
+ACCESS_TOKEN_SECRET_OWNER="your_owner_access_secret"
+ACCESS_TOKEN_SECRET_TENANT="your_tenant_access_secret"
+REFRESH_TOKEN_SECRET_OWNER="your_owner_refresh_secret"
+REFRESH_TOKEN_SECRET_TENANT="your_tenant_refresh_secret"
+ACCESS_LIFETIME="15m"
+REFRESH_LIFETIME="7d"
+CLOUDINARY_CLOUD_NAME="your_cloudinary_name"
+CLOUDINARY_API_KEY="your_cloudinary_key"
+CLOUDINARY_API_SECRET="your_cloudinary_secret"
+RESET_PASSWORD_KEY="your_reset_key"
+EMAIL_VERIFICATION_KEY="your_verification_key"
+CLIENT_URL=http://localhost:3000
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER="your_email@gmail.com"
+EMAIL_PASS="your_app_password"
+PORT=5500
+```
 
 Start the backend server:
 
