@@ -1,4 +1,4 @@
-# Real state rent and tenant management system
+# Real estate rent and tenant management system
 
 A comprehensive web application designed to bridge the gap between property owners and tenants. This full-stack system facilitates the entire rental lifecycle, from property listing and searching to digital contract signing, real-time communication, and rent management.
 
