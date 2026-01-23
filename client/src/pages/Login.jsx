@@ -71,129 +71,144 @@ const Login = () => {
       }
       dispatch(clearAlert());
     },
-    [dispatch]
+    [dispatch],
   );
 
   const handleChange = useCallback(
     (e) => {
       setFormValues({ ...values, [e.target.name]: e.target.value });
     },
-    [values]
+    [values],
   );
 
-  const handleFillCredentials = useCallback(() => {
-    setFormValues({
-      email:
-        param.role === "owner"
-          ? "test_owner_user@property.com"
-          : "test_tenant_user@property.com",
-      password: "secret",
-    });
-  }, []);
+  const isOwner = param.role === "owner";
 
   return (
-    <div>
-      <header className="flex m-1 shadow-sm">
-        <Logo />
-        <div className="flex flex-col justify-center ml-2">
-          <h5 className="font-display">Rent Manager</h5>
-          <p className="hidden text-xs md:block md:text-sm">
-            Find and Manage your rentals in one place
-          </p>
-        </div>
-      </header>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 font-serif">
+      <div className="flex w-full h-screen overflow-hidden bg-white shadow-2xl">
+        {/* Left Side - Hero Section */}
+        <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primaryDark to-primary relative items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
+          {/* Decorative circles */}
+          <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white opacity-10 blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary opacity-20 blur-3xl"></div>
 
-      <main className="px-6 h-full mt-12">
-        <div className="flex lg:justify-between justify-center items-center flex-wrap h-full g-6">
-          <div className="grow-0 shrink-1 md:shrink-0 basis-auto lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-            <img src={loginImg} className="w-full" alt="login banner" />
+          <div className="relative z-20 flex flex-col items-center text-center p-12 text-white">
+            <img
+              src={loginImg}
+              className="w-3/4 max-w-md mb-8 drop-shadow-2xl animate-pulse"
+              alt="login banner"
+              style={{ animationDuration: "3s" }}
+            />
+            <h2 className="font-display text-4xl mb-4 tracking-wide">
+              Welcome to Rent Manager
+            </h2>
+            <p className="text-lg font-light max-w-md opacity-90">
+              {isOwner
+                ? "Manage your properties and tenants efficiently in one secure place."
+                : "Find your perfect home and manage your rental payments with ease."}
+            </p>
           </div>
-          <div className="lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form onSubmit={handleSubmit}>
-              <div className="flex justify-center mb-6">
-                <h3 className="text-center">Login to your account</h3>
+        </div>
+
+        {/* Right Side - Form Section */}
+        <div className="w-full lg:w-1/2 flex flex-col relative overflow-y-auto">
+          {/* Header / Logo */}
+          <div className="p-6 md:p-10 flex items-center gap-3">
+            <Logo />
+            <h5 className="font-display text-2xl text-primaryDark">
+              Rent Manager
+            </h5>
+          </div>
+
+          <div className="flex-grow flex items-center justify-center px-6 md:px-12 lg:px-20 pb-12">
+            <div className="w-full max-w-md space-y-8">
+              <div className="text-center md:text-left">
+                <h3 className="font-heading text-3xl font-bold text-gray-800 mb-2">
+                  {isOwner ? "Owner Portal" : "Tenant Portal"}
+                </h3>
+                <p className="text-gray-500">
+                  Please sign in to access your dashboard.
+                </p>
               </div>
 
-              <div className="flex flex-col gap-6 mb-2">
-                <FormTextField
-                  value={values.email}
-                  name={"email"}
-                  type={"email"}
-                  label={"Email"}
-                  handleChange={handleChange}
-                  autoFocus={true}
-                />
-                <FormPasswordField
-                  value={values.password}
-                  handleChange={handleChange}
-                />
-                <div>
-                  <Button
-                    variant="contained"
-                    size="medium"
-                    color="tertiary"
-                    disabled={isLoading}
-                    sx={{
-                      color: "white",
-                    }}
-                    onClick={handleFillCredentials}
-                  >
-                    Fill with demo credentials
-                  </Button>
-                </div>
-                <div className="self-end">
-                  <Link
-                    to={`/forgot-password/${param.role}`}
-                    className="text-sm text-tertiary font-robotoNormal hover:text-tertiaryDark transition duration-200 ease-in-out"
-                  >
-                    Forgot Password?
-                  </Link>
-                </div>
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-5">
+                  <FormTextField
+                    value={values.email}
+                    name={"email"}
+                    type={"email"}
+                    label={"Email Address"}
+                    handleChange={handleChange}
+                    autoFocus={true}
+                  />
 
-              <div className="text-center">
-                <div className="mx-auto w-3/4 md:w-1/3">
+                  <div className="relative">
+                    <FormPasswordField
+                      value={values.password}
+                      handleChange={handleChange}
+                    />
+                    <div className="flex justify-end mt-2">
+                      <Link
+                        to={`/forgot-password/${param.role}`}
+                        className="text-sm font-medium text-tertiary hover:text-tertiaryDark transition-colors"
+                      >
+                        Forgot Password?
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4 pt-2">
                   <Button
                     variant="contained"
                     type="submit"
-                    size="medium"
-                    color="primary"
+                    size="large"
                     disabled={isLoading}
                     sx={{
+                      backgroundColor: "primary.main",
                       color: "white",
                       width: "100%",
+                      paddingY: 1.5,
+                      textTransform: "none",
+                      fontSize: "1.05rem",
+                      borderRadius: 2,
+                      boxShadow: "0 4px 14px 0 rgba(173, 162, 255, 0.39)",
                       "&:hover": {
                         backgroundColor: "primary.dark",
-                        opacity: [0.9, 0.8, 0.7],
+                        boxShadow: "0 6px 20px 0 rgba(173, 162, 255, 0.23)",
+                        transform: "translateY(-1px)",
                       },
+                      transition: "all 0.2s ease-in-out",
                     }}
                   >
                     {isLoading ? (
-                      <CircularProgress
-                        size={26}
-                        sx={{
-                          color: "#fff",
-                        }}
-                      />
+                      <CircularProgress size={26} sx={{ color: "#fff" }} />
                     ) : (
-                      "Login"
+                      "Sign In"
                     )}
                   </Button>
                 </div>
-                <p className="text-sm font-medium mt-4 pt-1 mb-0 md:text-base">
-                  Don't have an account?{" "}
-                  <Link
-                    to={`/register/${param.role}`}
-                    className="text-secondary hover:text-secondaryDark transition duration-200 ease-in-out"
-                  >
-                    Register
-                  </Link>
-                </p>
-              </div>
-            </form>
+
+                <div className="text-center pt-4">
+                  <p className="text-gray-600">
+                    Don't have an account?{" "}
+                    <Link
+                      to={`/register/${param.role}`}
+                      className="text-secondary font-bold hover:text-secondaryDark transition-colors hover:underline"
+                    >
+                      Register Now
+                    </Link>
+                  </p>
+                </div>
+              </form>
+            </div>
           </div>
+
+          <div className="lg:hidden absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-secondary"></div>
         </div>
-      </main>
+      </div>
+
       <AlertToast
         alertFlag={errorFlag}
         alertMsg={errorMsg}

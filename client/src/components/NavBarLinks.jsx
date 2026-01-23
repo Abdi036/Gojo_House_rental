@@ -132,7 +132,7 @@ const NavBarLinksTenant = ({ toggleMenu }) => {
             width: "100%",
           }}
         >
-          Rental Properties
+          Rental Props
         </Button>
       </Link>
       <Link
