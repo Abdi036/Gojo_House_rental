@@ -38,165 +38,255 @@ const Landing = () => {
   );
 
   return (
-    <div>
-      <header className="flex m-1 shadow-sm">
-        <Logo />
-        <div className="flex flex-col justify-center ml-2">
-          <h5 className="font-display">Rent Manager</h5>
-          <p className="hidden text-xs md:block md:text-sm">
-            Find and Manage your rentals in one place
-          </p>
-        </div>
-      </header>
-      <main className="flex flex-col items-center my-16">
-        <div className="md:w-2/3">
-          <h1 className="text-2xl md:text-4xl font-heading text-center font-extrabold">
-            Find and Manage{" "}
-            <span className="text-primaryDark"> rental properties </span>in one
-            place
-          </h1>
-          <p className="mt-8 text-center text-gray-700 w-4/5 mx-auto">
-            A simple and easy to use platform for property owners and tenants to
-            manage their rental properties. Post your property and find your
-            next tenant if you are a property owner. Find your next rental
-            property if you are a tenant.
-          </p>
-        </div>
-        <div className="flex mt-8 gap-8 flex-wrap w-2/3 justify-center">
-          <Button
-            variant="contained"
-            sx={{
-              color: "white",
-              "&:hover": {
-                backgroundColor: "primary.dark",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-            onClick={() => {
-              ref.current.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Get Started
-          </Button>
-          <Button
-            color="secondary"
-            variant="outlined"
-            onClick={useCallback(() => navigate("/about"), [navigate])}
-          >
-            Learn More
-          </Button>
-        </div>
-        <div className="md:w-2/4">
-          <img src={landingTitle} alt="landing title" className="w-full" />
-        </div>
-        <main className="" ref={ref}>
-          <section className="flex gap-16">
-            <img className="hidden md:block" src={landingImg2} alt="" />
-            <div className="flex flex-col self-center mx-auto p-4 w-full">
-              <h3 className="font-display mb-2">Are you a Property Owner?</h3>
-              <p className="">
-                Post your property online for future tenants to view
-              </p>
-              <p className="">Manage all your tenants in one place</p>
-              <p className="">Keep track of your tenant's payments</p>
-              <div className="flex justify-start mt-7">
-                <Button
-                  onClick={useCallback(
-                    () => navigate("/login/owner"),
-                    [navigate]
-                  )}
-                  variant="contained"
-                  size="medium"
-                  color="secondary"
-                  sx={{
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "secondary.dark",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                  }}
-                >
-                  Login
-                </Button>
-                <span className="mx-3 sm:text-2xl">|</span>
-
-                <Button
-                  onClick={useCallback(
-                    () => navigate("/register/owner"),
-                    [navigate]
-                  )}
-                  variant="contained"
-                  size="medium"
-                  color="primary"
-                  sx={{
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "primary.dark",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                  }}
-                >
-                  Register
-                </Button>
+    <div className="min-h-screen flex flex-col bg-gray-50 font-serif text-gray-800">
+      {/* Navbar options */}
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="flex items-center gap-3">
+              <Logo className="w-8 h-8 md:w-10 md:h-10" />
+              <div className="flex flex-col">
+                <h5 className="font-display text-xl md:text-2xl text-primaryDark tracking-wide m-0 leading-none">
+                  Rent Manager
+                </h5>
+                <span className="hidden md:block text-[0.65rem] text-gray-500 font-bold uppercase tracking-widest mt-1">
+                  Property Management Simplified
+                </span>
               </div>
             </div>
-          </section>
+            {/* Optional: Add clear login/signup buttons in header for quick access */}
+          </div>
+        </div>
+      </nav>
 
-          <hr className="my-4" />
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="relative pt-16 pb-20 lg:pt-32 lg:pb-28 overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 className="text-5xl md:text-7xl font-display font-extrabold text-gray-900 mb-8 tracking-tight leading-tight">
+              Find and Manage <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
+                Rental Properties
+              </span>
+            </h1>
+            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 mb-12 leading-relaxed">
+              The all-in-one platform for effortless property management. Whether
+              you're an owner or a tenant, experience housing the way it should
+              be.
+            </p>
 
-          <section className="flex gap-16 mt-5">
-            <img className="hidden md:block" src={landingImg} alt="" />
-            <div className="flex flex-col self-center mx-auto p-4 w-full">
-              <h3 className="font-display mb-2">Are you a tenant?</h3>
-              <p className="">
-                Browse through all kinds of properties for rent
-              </p>
-              <p className="">Contact the Property Owners</p>
-              <p className="">Keep track of your payments and due dates</p>
-              <div className="flex justify-start mt-7">
-                <Button
-                  onClick={useCallback(
-                    () => navigate("/login/tenant"),
-                    [navigate]
-                  )}
-                  variant="contained"
-                  size="medium"
-                  color="secondary"
-                  sx={{
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "secondary.dark",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                  }}
-                >
-                  Login
-                </Button>
-                <span className="mx-3 sm:text-2xl">|</span>
-                <Button
-                  onClick={useCallback(
-                    () => navigate("/register/tenant"),
-                    [navigate]
-                  )}
-                  variant="contained"
-                  size="medium"
-                  color="tertiary"
-                  sx={{
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "tertiary.dark",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                  }}
-                >
-                  Register
-                </Button>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 mb-20">
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  backgroundColor: "#ada2ff",
+                  padding: "12px 36px",
+                  fontSize: "1.1rem",
+                  borderRadius: "50px",
+                  textTransform: "none",
+                  boxShadow: "0 10px 25px -5px rgba(173, 162, 255, 0.4)",
+                  "&:hover": {
+                    backgroundColor: "#8f86d7",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 15px 30px -5px rgba(173, 162, 255, 0.5)",
+                  },
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => {
+                  ref.current?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Get Started
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                sx={{
+                  padding: "12px 36px",
+                  fontSize: "1.1rem",
+                  borderRadius: "50px",
+                  textTransform: "none",
+                  borderWidth: "2px",
+                  "&:hover": {
+                    borderWidth: "2px",
+                    backgroundColor: "rgba(238, 155, 1, 0.05)",
+                  },
+                }}
+                onClick={() => navigate("/about")}
+              >
+                Learn More
+              </Button>
+            </div>
+
+            <div className="relative max-w-5xl mx-auto mt-8 perspective-1000">
+              <div className="relative transform transition-transform duration-700 hover:scale-[1.01]">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-tertiary to-primary rounded-xl blur opacity-20"></div>
+                <img
+                  src={landingTitle}
+                  alt="Dashboard Preview"
+                  className="relative w-full rounded-xl shadow-2xl border border-gray-100"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Roles Section */}
+        <div ref={ref} className="bg-white py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32">
+            {/* Owner Section */}
+            <div className="group relative bg-white rounded-3xl p-4 md:p-8 transition-all hover:bg-gray-50/50">
+              <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
+                <div className="w-full md:w-1/2 relative">
+                  <div className="absolute -inset-4 bg-secondary/20 rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                  <img
+                    src={landingImg2}
+                    alt="Property Owner"
+                    className="relative w-full h-auto drop-shadow-xl transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="w-full md:w-1/2 space-y-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-secondaryDark font-bold rounded-full text-sm uppercase tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-secondary"></span>
+                    For Property Owners
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight">
+                    Maximize Income, <br /> Minimize Stress
+                  </h2>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    List your properties, screen tenants, and track payments
+                    seamlessly. Our tools give you full control over your real
+                    estate portfolio without the headache.
+                  </p>
+                  <ul className="space-y-4 text-gray-700 font-medium">
+                    {['Post properties instantly', 'Direct tenant communication', 'Automated payment tracking'].map((item, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <div className="p-1 rounded-full bg-green-100 text-green-600">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center gap-4 pt-4">
+                    <Button
+                      onClick={() => navigate("/login/owner")}
+                      variant="contained"
+                      size="large"
+                      color="secondary"
+                      sx={{
+                        color: "white",
+                        padding: "10px 30px",
+                        borderRadius: "12px",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        boxShadow: "0 4px 14px 0 rgba(238, 155, 1, 0.39)",
+                      }}
+                    >
+                      Login as Owner
+                    </Button>
+                    <span className="text-gray-300 text-2xl font-light">|</span>
+                    <Button
+                      onClick={() => navigate("/register/owner")}
+                      variant="text"
+                      size="large"
+                      color="primary"
+                      sx={{
+                         fontWeight: "bold",
+                         textTransform: "none",
+                         "&:hover": { backgroundColor: "transparent", color: "primary.dark" }
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-gray-100" />
+
+            {/* Tenant Section */}
+            <div className="group relative bg-white rounded-3xl p-4 md:p-8 transition-all hover:bg-gray-50/50">
+              <div className="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-24">
+                <div className="w-full md:w-1/2 relative">
+                  <div className="absolute -inset-4 bg-tertiary/20 rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                  <img
+                    src={landingImg}
+                    alt="Tenant"
+                    className="relative w-full h-auto drop-shadow-xl transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="w-full md:w-1/2 space-y-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-tertiaryDark font-bold rounded-full text-sm uppercase tracking-wider">
+                     <span className="w-2 h-2 rounded-full bg-tertiary"></span>
+                    For Tenants
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight">
+                    Find Your <br /> Perfect Home
+                  </h2>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    Browse verified listings, contact landlords directly, and
+                    manage your rent payments all in one secure dashboard.
+                  </p>
+                  <ul className="space-y-4 text-gray-700 font-medium">
+                    {['Browse distinct listings', 'Keep track of due dates', 'Secure digital payments'].map((item, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                         <div className="p-1 rounded-full bg-green-100 text-green-600">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center gap-4 pt-4">
+                    <Button
+                      onClick={() => navigate("/login/tenant")}
+                      variant="contained"
+                      size="large"
+                      sx={{
+                        backgroundColor: "#00ACCF",
+                        color: "white",
+                        padding: "10px 30px",
+                        borderRadius: "12px",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        boxShadow: "0 4px 14px 0 rgba(0, 172, 207, 0.39)",
+                        "&:hover": { backgroundColor: "#0496b4" }
+                      }}
+                    >
+                      Login as Tenant
+                    </Button>
+                    <span className="text-gray-300 text-2xl font-light">|</span>
+                    <Button
+                      onClick={() => navigate("/register/tenant")}
+                      variant="text"
+                      size="large"
+                      color="tertiary"
+                      sx={{
+                        color: "tertiary.main",
+                        fontWeight: "bold",
+                        textTransform: "none",
+                         "&:hover": { backgroundColor: "transparent", color: "tertiary.dark" }
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
         </main>
         <WhyChooseUs />
       </main>
+      
       <Footer />
       <AlertToast
         alertFlag={errorFlag}
