@@ -316,8 +316,8 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </div>
         <WhyChooseUs />
       </main>
 
