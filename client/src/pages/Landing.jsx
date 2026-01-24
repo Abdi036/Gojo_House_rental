@@ -15,7 +15,7 @@ const Landing = () => {
   const ref = useRef(null);
 
   const { user, userType, errorFlag, alertType, errorMsg } = useSelector(
-    (store) => store.auth
+    (store) => store.auth,
   );
 
   // if user is logged in, redirect to home page
@@ -33,7 +33,7 @@ const Landing = () => {
       }
       dispatch(clearAlert());
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (
@@ -69,9 +69,9 @@ const Landing = () => {
               </span>
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 mb-12 leading-relaxed">
-              The all-in-one platform for effortless property management. Whether
-              you're an owner or a tenant, experience housing the way it should
-              be.
+              The all-in-one platform for effortless property management.
+              Whether you're an owner or a tenant, experience housing the way it
+              should be.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-6 mb-20">
@@ -160,11 +160,25 @@ const Landing = () => {
                     estate portfolio without the headache.
                   </p>
                   <ul className="space-y-4 text-gray-700 font-medium">
-                    {['Post properties instantly', 'Direct tenant communication', 'Automated payment tracking'].map((item, i) => (
+                    {[
+                      "Post properties instantly",
+                      "Direct tenant communication",
+                      "Automated payment tracking",
+                    ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3">
                         <div className="p-1 rounded-full bg-green-100 text-green-600">
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="3"
+                              d="M5 13l4 4L19 7"
+                            />
                           </svg>
                         </div>
                         {item}
@@ -195,9 +209,12 @@ const Landing = () => {
                       size="large"
                       color="primary"
                       sx={{
-                         fontWeight: "bold",
-                         textTransform: "none",
-                         "&:hover": { backgroundColor: "transparent", color: "primary.dark" }
+                        fontWeight: "bold",
+                        textTransform: "none",
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                          color: "primary.dark",
+                        },
                       }}
                     >
                       Register
@@ -222,7 +239,7 @@ const Landing = () => {
                 </div>
                 <div className="w-full md:w-1/2 space-y-8">
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-tertiaryDark font-bold rounded-full text-sm uppercase tracking-wider">
-                     <span className="w-2 h-2 rounded-full bg-tertiary"></span>
+                    <span className="w-2 h-2 rounded-full bg-tertiary"></span>
                     For Tenants
                   </div>
                   <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight">
@@ -233,11 +250,25 @@ const Landing = () => {
                     manage your rent payments all in one secure dashboard.
                   </p>
                   <ul className="space-y-4 text-gray-700 font-medium">
-                    {['Browse distinct listings', 'Keep track of due dates', 'Secure digital payments'].map((item, i) => (
+                    {[
+                      "Browse distinct listings",
+                      "Keep track of due dates",
+                      "Secure digital payments",
+                    ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3">
-                         <div className="p-1 rounded-full bg-green-100 text-green-600">
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                        <div className="p-1 rounded-full bg-green-100 text-green-600">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="3"
+                              d="M5 13l4 4L19 7"
+                            />
                           </svg>
                         </div>
                         {item}
@@ -257,7 +288,7 @@ const Landing = () => {
                         textTransform: "none",
                         fontWeight: "bold",
                         boxShadow: "0 4px 14px 0 rgba(0, 172, 207, 0.39)",
-                        "&:hover": { backgroundColor: "#0496b4" }
+                        "&:hover": { backgroundColor: "#0496b4" },
                       }}
                     >
                       Login as Tenant
@@ -272,7 +303,10 @@ const Landing = () => {
                         color: "tertiary.main",
                         fontWeight: "bold",
                         textTransform: "none",
-                         "&:hover": { backgroundColor: "transparent", color: "tertiary.dark" }
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                          color: "tertiary.dark",
+                        },
                       }}
                     >
                       Register
@@ -284,7 +318,7 @@ const Landing = () => {
           </div>
         </div>
       </main>
-      
+
       <Footer />
       <AlertToast
         alertFlag={errorFlag}
