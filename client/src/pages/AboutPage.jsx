@@ -24,7 +24,6 @@ const AboutPageComponent = () => {
           </p>
         </div>
       </div>
-
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
         {/* Property Owner Section */}
