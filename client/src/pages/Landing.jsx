@@ -5,6 +5,7 @@ import { Logo, AlertToast, Footer } from "../components";
 import landingImg from "../assets/images/landing1.svg";
 import landingImg2 from "../assets/images/landing2.svg";
 import landingTitle from "../assets/images/landingTitle.svg";
+import WhyChooseUs from "../components/WhyChooseUs.jsx";
 
 import { Button } from "@mui/material";
 import { clearAlert } from "../features/auth/authSlice";
@@ -194,6 +195,7 @@ const Landing = () => {
             </div>
           </section>
         </main>
+        <WhyChooseUs />
       </main>
       <Footer />
       <AlertToast
